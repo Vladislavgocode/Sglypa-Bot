@@ -6,3 +6,4 @@ typing
 cloudscraper==1.2.64
 requests
 pyttsx3==2.90
+gTTS
