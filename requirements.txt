@@ -1,7 +1,7 @@
 asyncio
 discord.py 
 requests
-re
+regex
 typing
 cloudscraper
 requests
