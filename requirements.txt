@@ -5,6 +5,5 @@ regex
 typing
 cloudscraper==1.2.64
 requests
-discord.utils
 pyttsx3
 os
