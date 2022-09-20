@@ -9,3 +9,6 @@ pyttsx3==2.90
 gTTS
 python-espeak
 pyttsx3eaidk
+espeakng
+speake3
+py-espeak-ng
