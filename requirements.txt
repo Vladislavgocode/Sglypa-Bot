@@ -5,5 +5,4 @@ regex
 typing
 cloudscraper==1.2.64
 requests
-pyttsx3
-os
+pyttsx3==2.90
