@@ -1,0 +1,11 @@
+asyncio
+discord.py 
+requests
+re
+typing
+cloudscraper
+requests
+itertools
+discord.utils
+pyttsx3
+os
