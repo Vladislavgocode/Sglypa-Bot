@@ -9,8 +9,7 @@ from requests import Session
 from itertools import groupby
 from discord.utils import get
 from discord import FFmpegPCMAudio
-# import pyttsx3
-import espeak
+import pyttsx3
 import asyncio
 import os
 
@@ -216,10 +215,9 @@ async def sgv(ctx):
             lines = f.readlines()
             random_line = random.choice(lines)
             string = random_line
-            espeak.init()
-            speaker = espeak.Espeak()
-            speaker.save_to_file(string, f'speechers/voice.mp3')
-            speaker.runAndWait()
+            engine = pyttsx3.init()
+            engine.save_to_file(string, f'speechers/voice.mp3')
+            engine.runAndWait()
             f.close()
     channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild = ctx.guild)
