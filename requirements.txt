@@ -5,7 +5,6 @@ regex
 typing
 cloudscraper
 requests
-itertools
 discord.utils
 pyttsx3
 os
