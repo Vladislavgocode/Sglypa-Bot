@@ -3,7 +3,7 @@ discord.py
 requests
 regex
 typing
-cloudscraper
+cloudscraper==1.2.64
 requests
 discord.utils
 pyttsx3
