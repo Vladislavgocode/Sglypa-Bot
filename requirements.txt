@@ -15,3 +15,6 @@ PyNaCl
 ffmpeg
 discord.py[voice]
 pip
+youtube-dl
+google-api-python-client
+python-dotenv

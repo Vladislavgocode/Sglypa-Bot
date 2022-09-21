@@ -1,10 +1,17 @@
+from fileinput import filename
 import discord
 from discord.ext import commands
 import os
 import asyncio
 import random
+from googleapiclient.discovery import build
 import pyttsx3
 from discord.utils import get
+
+ffmpeg_options = {
+    'options': '-vn',
+    # 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5'
+}
 
 
 bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
@@ -31,7 +38,8 @@ async def sgv(ctx):
     else:
         await asyncio.sleep(2)
         voice = await channel.connect()
-        voice.play(discord.FFmpegPCMAudio(executable="sh ffmpeg.exe",source = 'speechers/voice.mp3'))
+        voice.play(discord.FFmpegPCMAudio('speechers/voice.mp3', **ffmpeg_options))
+        # voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg",source = 'speechers/voice.mp3'))
         if voice and voice.is_connected():
             await asyncio.sleep(5)
             await voice.disconnect()
