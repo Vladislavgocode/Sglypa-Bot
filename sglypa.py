@@ -202,7 +202,7 @@ async def sgb(ctx):
             f.close()
     response = balaboba(random_line, intro=0)
     await ctx.reply(response)
-    
+
 @bot.command()
 async def sgv(ctx):
     id_server =  f"servers/{ctx.guild.id}"
@@ -222,7 +222,7 @@ async def sgv(ctx):
         await asyncio.sleep(2)
         voice = await channel.connect()
         # voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg.exe",source = 'speechers/voice.mp3'))
-        voice.play(discord.FFmpegPCMAudio('speechers/voice.mp3'))
+        voice.play(FFmpegPCMAudio('speechers/voice.mp3'))
         if voice and voice.is_connected():
             await asyncio.sleep(5)
             await voice.disconnect()
