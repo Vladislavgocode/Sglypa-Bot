@@ -18,12 +18,12 @@ ffmpeg_options = {'options': "-vn"}
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Разработчик бота cloudy ы :)"))
 
-cmd = ['ffmpeg', '-i', 'speechers/voice.mp3', '-vn', '-f', 'mp3', 'speechers/voice.mp3']
-out = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-print(out.stdout)
-print(out.stderr)
-for f in os.listdir("./speechers"):
-    print(f)
+# cmd = ['ffmpeg', '-i', 'speechers/voice.mp3', '-vn', '-f', 'mp3', 'speechers/voice.mp3']
+# out = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+# print(out.stdout)
+# print(out.stderr)
+# for f in os.listdir("./speechers"):
+#     print(f)
 
 @bot.command()
 async def sgv(ctx):
