@@ -8,6 +8,5 @@ requests
 pyttsx3==2.90
 gTTS
 PyNaCl
-ffmpeg
 discord.py[voice]
 pip

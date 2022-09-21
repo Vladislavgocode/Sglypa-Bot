@@ -7,7 +7,11 @@ import pyttsx3
 
 from sglypa import TOKEN
 
+import ctypes
+import ctypes.util
 
+find_opus = ctypes.util.find_library('opus')
+discord.opus.load_opus(find_opus)
 
 
 bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
