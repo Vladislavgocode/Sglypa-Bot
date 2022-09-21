@@ -15,14 +15,16 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 @bot.command()
 async def sgv(ctx):
     id_server =  f"servers/{ctx.guild.id}"
-    with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
-            lines = f.readlines()
-            random_line = random.choice(lines)
-            string = random_line
-            engine = pyttsx3.init()
-            engine.save_to_file(string, f'speechers/voice.mp3')
-            engine.runAndWait()
-            f.close()
+    # with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
+    #         lines = f.readlines()
+    #         random_line = random.choice(lines)
+    string = "test"
+    engine = pyttsx3.init()
+    engine.save_to_file(string, f'speechers/voice.mp3')
+    engine.runAndWait()
+    # f.close()
+
+
     channel = ctx.message.author.voice.channel
     voice = get(bot.voice_clients, guild = ctx.guild)
     if voice and voice.is_connected():
