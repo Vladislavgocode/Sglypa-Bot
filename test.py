@@ -5,18 +5,12 @@ import asyncio
 import time
 import pyttsx3
 
-from sglypa import TOKEN
 
-import ctypes
-import ctypes.util
-
-find_opus = ctypes.util.find_library('opus')
-discord.opus.load_opus(find_opus)
 
 
 bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
 bot.remove_command("help")
-TOKEN = os.getenv("DISCORD_TOKEN")
+# TOKEN = os.getenv("DISCORD_TOKEN")
 
 ffmpeg_options = {'options': "-vn"}
 
@@ -36,4 +30,4 @@ async def sgv(ctx):
 
 
 
-bot.run(TOKEN)
+bot.run("MTAxNTU0NDgwNjYzMTU1OTIyMg.GgoGjP.AU5YWplcYCVU1Y0hYBJYTq0alp4BSk4KoaWJbo")
