@@ -1,13 +1,5 @@
-asyncio
-discord.py==1.7.3
-requests
-regex
-typing
-cloudscraper==1.2.64
-requests
-pyttsx3==2.90
-gTTS
+discord.py
+youtube-dl
 PyNaCl
-ffmpeg
-discord.py[voice]
-pip
+google-api-python-client
+python-dotenv
