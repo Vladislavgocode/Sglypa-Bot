@@ -3,15 +3,12 @@ import os
 import asyncio
 import youtube_dl
 import time
+import pyttsx3
 
 
-# Discord bot Initialization
-TOKEN = os.getenv("DISCORD_TOKEN")
+
 client = discord.Client(intents=discord.Intents.all())
-voice_clients = {}
 
-yt_dl_opts = {'format': 'bestaudio/best'}
-ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
 
 ffmpeg_options = {'options': "-vn"}
 
@@ -22,44 +19,25 @@ async def on_message(msg):
 
         try:
             voice_client = await msg.author.voice.channel.connect()
-            voice_clients[voice_client.guild.id] = voice_client
+            # voice_clients[voice_client.guild.id] = voice_client
         except:
             print("error")
 
         try:
-            url = msg.content.split()[1]
-
-            loop = asyncio.get_event_loop()
-            data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
-
-            song = data['url']
-            player = discord.FFmpegPCMAudio(song, **ffmpeg_options)
-
-            voice_clients[msg.guild.id].play(player)
+            # url = msg.content.split()[1]
+            string = "test"
+            engine = pyttsx3.init()
+            engine.save_to_file(string, f'speechers/voice.mp3')
+            engine.runAndWait()
+            # f.close()
+            voice_client.play(discord.FFmpegPCMAudio(f'speechers/voice.mp3', **ffmpeg_options))
+            if voice_client and voice_client.is_connected():
+                await asyncio.sleep(5)
+                await voice_client.disconnect()
 
         except Exception as err:
             print(err)
 
 
-    if msg.content.startswith("?pause"):
-        try:
-            voice_clients[msg.guild.id].pause()
-        except Exception as err:
-            print(err)
 
-    # This resumes the current song playing if it's been paused
-    if msg.content.startswith("?resume"):
-        try:
-            voice_clients[msg.guild.id].resume()
-        except Exception as err:
-            print(err)
-
-    # This stops the current playing song
-    if msg.content.startswith("?stop"):
-        try:
-            voice_clients[msg.guild.id].stop()
-            await voice_clients[msg.guild.id].disconnect()
-        except Exception as err:
-            print(err)
-
-client.run(TOKEN)
+client.run("MTAxNTU0NDgwNjYzMTU1OTIyMg.GMCB6O.uFzYjbC3INP0-sEoe2uvfeGF_bmlfNfocT-t-g")
