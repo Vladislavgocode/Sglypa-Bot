@@ -102,9 +102,8 @@ async def on_message(ctx):
 
 @bot.command()
 async def help(ctx):
-    print(ctx.author.color)
     embed = discord.Embed(title=f"Помощь по командам бота", 
-    color=ctx.author.color).add_field(name="Сгенерировать мем",value="``+sgm``").add_field(
+    color='#52f464').add_field(name="Сгенерировать мем",value="``+sgm``").add_field(
     name="Сгенерировать слово",value="``+sg``").add_field(name="Набалаболить слово",
     value="``+sgb``").add_field(name="Зайду в войс (ПОКА НЕДОСТУПНО) :(",
     value="``+sgv``")
