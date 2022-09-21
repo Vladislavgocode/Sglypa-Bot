@@ -1,1 +1,1 @@
-worker: python sglypa.py
+worker: python test.py
