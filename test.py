@@ -1,3 +1,4 @@
+from tokenize import Token
 import discord
 import os
 import asyncio
@@ -5,10 +6,12 @@ import youtube_dl
 import time
 import pyttsx3
 
+from sglypa import TOKEN
+
 
 
 client = discord.Client(intents=discord.Intents.all())
-
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 ffmpeg_options = {'options': "-vn"}
 
@@ -40,4 +43,4 @@ async def on_message(msg):
 
 
 
-client.run("MTAxNTU0NDgwNjYzMTU1OTIyMg.GMCB6O.uFzYjbC3INP0-sEoe2uvfeGF_bmlfNfocT-t-g")
+client.run(TOKEN)
