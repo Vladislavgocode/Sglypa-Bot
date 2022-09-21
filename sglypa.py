@@ -220,7 +220,8 @@ async def sgv(ctx):
     else:
         await asyncio.sleep(2)
         voice = await channel.connect()
-        voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg.exe",source = 'speechers/voice.mp3'))
+        # voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg.exe",source = 'speechers/voice.mp3'))
+        voice.play(discord.FFmpegPCMAudio('speechers/voice.mp3'))
         if voice and voice.is_connected():
             await asyncio.sleep(5)
             await voice.disconnect()
