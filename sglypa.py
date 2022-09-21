@@ -22,7 +22,6 @@ user_messages = []
 @bot.listen()
 async def on_message(ctx):
     id_server =  f"{ctx.guild.id}"
-    print(id_server)
     with open(f'servers/{id_server}.txt', 'a' ,encoding='utf-8') as f:
               if ctx.author != bot.user:
                 f.write(f'{ctx.content}')
@@ -109,8 +108,6 @@ async def sgm(ctx):
     id_server =  f"{ctx.guild.id}"
     with open(f'servers/{id_server}.txt',"r",encoding='utf-8') as f:
             lines = f.readlines()
-            random_line = random.choice(lines)
-            print(random_line)
             f.close()
 
     username = 'dlyabota'
@@ -141,7 +138,6 @@ async def sg(ctx):
     with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
             lines = f.readlines()
             random_line = random.choice(lines)
-            print(random_line)
             f.close()
     await ctx.reply(random_line)
 
@@ -203,10 +199,8 @@ async def sgb(ctx):
     with open(f'servers/{id_server}.txt',"r",encoding='utf-8') as f:
             lines = f.readlines()
             random_line = random.choice(lines)
-            print(random_line)
             f.close()
     response = balaboba(random_line, intro=0)
-    print(response)
     await ctx.reply(response)
 @bot.command()
 async def sgv(ctx):
