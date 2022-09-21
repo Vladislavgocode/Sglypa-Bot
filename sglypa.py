@@ -100,10 +100,15 @@ async def on_message(ctx):
     if len(user_messages) == len(user_messages)+chance:
             await ctx.reply(random_line)     
 
+color = "#52f464"
+sixteenIntegerHex = int(color.replace("#", ""), 16)
+readableHex = int(hex(sixteenIntegerHex), 0)
+
 @bot.command()
 async def help(ctx):
+    
     embed = discord.Embed(title=f"Помощь по командам бота", 
-    color='#52f464').add_field(name="Сгенерировать мем",value="``+sgm``").add_field(
+    color=readableHex).add_field(name="Сгенерировать мем",value="``+sgm``").add_field(
     name="Сгенерировать слово",value="``+sg``").add_field(name="Набалаболить слово",
     value="``+sgb``").add_field(name="Зайду в войс (ПОКА НЕДОСТУПНО) :(",
     value="``+sgv``")
