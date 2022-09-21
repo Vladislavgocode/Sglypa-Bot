@@ -10,3 +10,4 @@ gTTS
 PyNaCl
 discord.py[voice]
 pip
+python-espeak
