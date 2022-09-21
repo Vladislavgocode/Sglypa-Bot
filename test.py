@@ -4,9 +4,11 @@ import asyncio
 import youtube_dl
 import time
 
+
+# Discord bot Initialization
 TOKEN = os.getenv("DISCORD_TOKEN")
-bot = discord.bot(intents=discord.Intents.all())
-voice_bots = {}
+client = discord.Client(intents=discord.Intents.all())
+voice_clients = {}
 
 yt_dl_opts = {'format': 'bestaudio/best'}
 ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
@@ -14,13 +16,13 @@ ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
 ffmpeg_options = {'options': "-vn"}
 
 
-@bot.event
+@client.event
 async def on_message(msg):
     if msg.content.startswith("?play"):
 
         try:
-            voice_bot = await msg.author.voice.channel.connect()
-            voice_bots[voice_bot.guild.id] = voice_bot
+            voice_client = await msg.author.voice.channel.connect()
+            voice_clients[voice_client.guild.id] = voice_client
         except:
             print("error")
 
@@ -33,7 +35,7 @@ async def on_message(msg):
             song = data['url']
             player = discord.FFmpegPCMAudio(song, **ffmpeg_options)
 
-            voice_bots[msg.guild.id].play(player)
+            voice_clients[msg.guild.id].play(player)
 
         except Exception as err:
             print(err)
@@ -41,23 +43,23 @@ async def on_message(msg):
 
     if msg.content.startswith("?pause"):
         try:
-            voice_bots[msg.guild.id].pause()
+            voice_clients[msg.guild.id].pause()
         except Exception as err:
             print(err)
 
     # This resumes the current song playing if it's been paused
     if msg.content.startswith("?resume"):
         try:
-            voice_bots[msg.guild.id].resume()
+            voice_clients[msg.guild.id].resume()
         except Exception as err:
             print(err)
 
     # This stops the current playing song
     if msg.content.startswith("?stop"):
         try:
-            voice_bots[msg.guild.id].stop()
-            await voice_bots[msg.guild.id].disconnect()
+            voice_clients[msg.guild.id].stop()
+            await voice_clients[msg.guild.id].disconnect()
         except Exception as err:
             print(err)
 
-bot.run(TOKEN)
+client.run(TOKEN)
