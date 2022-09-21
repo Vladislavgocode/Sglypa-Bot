@@ -10,7 +10,7 @@ import pyttsx3
 
 bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
 bot.remove_command("help")
-# TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 ffmpeg_options = {'options': "-vn"}
 
@@ -30,4 +30,4 @@ async def sgv(ctx):
 
 
 
-bot.run("MTAxNTU0NDgwNjYzMTU1OTIyMg.GgoGjP.AU5YWplcYCVU1Y0hYBJYTq0alp4BSk4KoaWJbo")
+bot.run(TOKEN)
