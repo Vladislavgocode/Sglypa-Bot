@@ -1,47 +1,63 @@
-from fileinput import filename
 import discord
-from discord.ext import commands
 import os
 import asyncio
-import random
-from googleapiclient.discovery import build
-import pyttsx3
-from discord.utils import get
+import youtube_dl
+import time
 
-ffmpeg_options = {
-    'options': '-vn',
-    # 'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5'
-}
-
-
-bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
-bot.remove_command("help")
 TOKEN = os.getenv("DISCORD_TOKEN")
+bot = discord.bot(intents=discord.Intents.all())
+voice_bots = {}
 
-@bot.command()
-async def sgv(ctx):
-    id_server =  f"servers/{ctx.guild.id}"
-    # with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
-    #         lines = f.readlines()
-    #         random_line = random.choice(lines)
-    string = "test"
-    engine = pyttsx3.init()
-    engine.save_to_file(string, f'speechers/voice.mp3')
-    engine.runAndWait()
-    # f.close()
+yt_dl_opts = {'format': 'bestaudio/best'}
+ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
+
+ffmpeg_options = {'options': "-vn"}
 
 
-    channel = ctx.message.author.voice.channel
-    voice = get(bot.voice_clients, guild = ctx.guild)
-    if voice and voice.is_connected():
-        await voice.move_to(channel)
-    else:
-        await asyncio.sleep(2)
-        voice = await channel.connect()
-        voice.play(discord.FFmpegPCMAudio('speechers/voice.mp3', **ffmpeg_options))
-        # voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg",source = 'speechers/voice.mp3'))
-        if voice and voice.is_connected():
-            await asyncio.sleep(5)
-            await voice.disconnect()
+@bot.event
+async def on_message(msg):
+    if msg.content.startswith("?play"):
+
+        try:
+            voice_bot = await msg.author.voice.channel.connect()
+            voice_bots[voice_bot.guild.id] = voice_bot
+        except:
+            print("error")
+
+        try:
+            url = msg.content.split()[1]
+
+            loop = asyncio.get_event_loop()
+            data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
+
+            song = data['url']
+            player = discord.FFmpegPCMAudio(song, **ffmpeg_options)
+
+            voice_bots[msg.guild.id].play(player)
+
+        except Exception as err:
+            print(err)
+
+
+    if msg.content.startswith("?pause"):
+        try:
+            voice_bots[msg.guild.id].pause()
+        except Exception as err:
+            print(err)
+
+    # This resumes the current song playing if it's been paused
+    if msg.content.startswith("?resume"):
+        try:
+            voice_bots[msg.guild.id].resume()
+        except Exception as err:
+            print(err)
+
+    # This stops the current playing song
+    if msg.content.startswith("?stop"):
+        try:
+            voice_bots[msg.guild.id].stop()
+            await voice_bots[msg.guild.id].disconnect()
+        except Exception as err:
+            print(err)
 
 bot.run(TOKEN)
