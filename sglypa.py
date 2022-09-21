@@ -202,6 +202,7 @@ async def sgb(ctx):
             f.close()
     response = balaboba(random_line, intro=0)
     await ctx.reply(response)
+    
 @bot.command()
 async def sgv(ctx):
     id_server =  f"servers/{ctx.guild.id}"
