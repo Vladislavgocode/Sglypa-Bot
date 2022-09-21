@@ -19,6 +19,11 @@ bot.remove_command("help")
 TOKEN = os.getenv("DISCORD_TOKEN")
 user_messages = []
 
+@bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Разработчик бота cloudy ы :)"))
+    
+
 @bot.listen()
 async def on_message(ctx):
     id_server =  f"{ctx.guild.id}"
@@ -208,27 +213,29 @@ async def sgb(ctx):
     response = balaboba(random_line, intro=0)
     print(response)
     await ctx.reply(response)
-@bot.command()
-async def sgv(ctx):
-    id_server =  f"servers/{ctx.guild.id}"
-    with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
-            lines = f.readlines()
-            random_line = random.choice(lines)
-            string = random_line
-            engine = pyttsx3.init()
-            engine.save_to_file(string, f'speechers/voice.mp3')
-            engine.runAndWait()
-            f.close()
-    channel = ctx.message.author.voice.channel
-    voice = get(bot.voice_clients, guild = ctx.guild)
-    if voice and voice.is_connected():
-        await voice.move_to(channel)
-    else:
-        await asyncio.sleep(2)
-        voice = await channel.connect()
-        voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg.exe",source = 'speechers/voice.mp3'))
-        if voice and voice.is_connected():
-            await asyncio.sleep(5)
-            await voice.disconnect()
+
+
+# @bot.command()
+# async def sgv(ctx):
+#     id_server =  f"servers/{ctx.guild.id}"
+#     with open(f'{id_server}.txt',"r",encoding='utf-8') as f:
+#             lines = f.readlines()
+#             random_line = random.choice(lines)
+#             string = random_line
+#             engine = pyttsx3.init()
+#             engine.save_to_file(string, f'speechers/voice.mp3')
+#             engine.runAndWait()
+#             f.close()
+#     channel = ctx.message.author.voice.channel
+#     voice = get(bot.voice_clients, guild = ctx.guild)
+#     if voice and voice.is_connected():
+#         await voice.move_to(channel)
+#     else:
+#         await asyncio.sleep(2)
+#         voice = await channel.connect()
+#         voice.play(discord.FFmpegPCMAudio(executable="audio/ffmpeg.exe",source = 'speechers/voice.mp3'))
+#         if voice and voice.is_connected():
+#             await asyncio.sleep(5)
+#             await voice.disconnect()
 
 bot.run(TOKEN)

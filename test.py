@@ -5,8 +5,7 @@ import asyncio
 import time
 import pyttsx3
 import subprocess
-
-
+import espeak
 
 bot = commands.Bot(command_prefix="+",intents=discord.Intents.all())
 bot.remove_command("help")
@@ -32,7 +31,7 @@ async def sgv(ctx):
     engine = pyttsx3.init()
     engine.save_to_file(string, f'speechers/voice.mp3')
     engine.runAndWait()
-    voice_client.play(discord.FFmpegPCMAudio(f'./speechers/voice.mp3', **ffmpeg_options))
+    voice_client.play(discord.FFmpegPCMAudio(f'/speechers/voice.mp3', **ffmpeg_options))
     if voice_client and voice_client.is_connected():
         await asyncio.sleep(5)
         await voice_client.disconnect()
