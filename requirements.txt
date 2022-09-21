@@ -7,14 +7,7 @@ cloudscraper==1.2.64
 requests
 pyttsx3==2.90
 gTTS
-pyttsx3eaidk
-espeakng
-speake3
-py-espeak-ng
 PyNaCl
 ffmpeg
 discord.py[voice]
 pip
-youtube-dl
-google-api-python-client
-python-dotenv
