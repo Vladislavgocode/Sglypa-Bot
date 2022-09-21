@@ -13,7 +13,8 @@ bot.remove_command("help")
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 ffmpeg_options = {'options': "-vn"}
-@bot.event()
+
+@bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="Разработчик бота cloudy ы :)"))
 
@@ -23,7 +24,7 @@ print(out.stdout)
 print(out.stderr)
 for f in os.listdir("./assets"):
     print(f)
-    
+
 @bot.command()
 async def sgv(ctx):
     voice_client = await ctx.author.voice.channel.connect()
