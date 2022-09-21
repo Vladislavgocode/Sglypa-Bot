@@ -11,3 +11,7 @@ pyttsx3eaidk
 espeakng
 speake3
 py-espeak-ng
+PyNaCl
+ffmpeg
+discord.py[voice]
+pip
